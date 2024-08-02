@@ -19,6 +19,73 @@ public:
 	int search(char[20]);
 };
 
+
+int main() {
+	student* s[20];
+	int choice, i = 0, t, ch;
+	char Name[20];
+	while (1) {
+		std::cout << "\n\t1.Record Student";
+		std::cout << "\n\t2.Show Student Record";
+		std::cout << "\n\t3.Search Student";
+		std::cout << "\n\t4.EXIT";
+		std::cout << "\n\tEnter ur choice: ";
+		std::cin >> choice;
+
+		switch (choice)
+		{
+		case 1:
+			s[i] = new student;
+			s[i]->getdata();
+			i++;
+			break;
+		case 2:
+			std::cin.ignore();
+			std::cout << "\nEnter Student name: ";
+			std::cin.getline(Name, 20);
+			for (t = 0; t < i; t++) {
+				if (s[t]->search(Name)) {
+					s[t]->showdata();
+					break;
+				}
+			}
+			if (t == i)
+				std::cout << "Student not record in base";
+			break;
+		case 3:
+			std::cin.ignore();
+			std::cout << "\nEnter Student Name: ";
+			std::cin.getline(Name, 20);
+			for (t = 0; t < i; t++) {
+				if (s[t]->search(Name)) {
+					std::cout << "\nThe student is recorded in the database";
+					std::cout << "\nWould you like to know more about the student?";
+					std::cout << "\n\t1.YES";
+					std::cout << "\n\t2.NO" << std::endl;
+					std::cin >> ch;
+					if (ch == 1)
+						s[t]->showdata();
+					else if (ch == 2)
+						return 1;
+					break;
+
+				}
+
+			}
+			if (t == i)
+				std::cout << "\nThe student is not recorded in the database";
+			break;
+		case 4:
+			exit(0);
+		default: std::cout << "\nInvalid number of choice!";
+		}
+	}
+
+
+
+	return 0;
+}
+
 void student::CalcAverage() {
 	average = (eng_mark + cmp_science_mark + rus_mark + physic_mark + biolog_mark) / 5.0;
 	if (average >= 90)
@@ -76,70 +143,4 @@ int student::search(char rnamestud[20]) {
 		return 0;
 }
 
-
-int main() {
-	student* s[20];
-	int choice, i = 0, t, ch;
-	char Name[20];
-	while (1) {
-		std::cout << "\n\t1.Record Student";
-		std::cout << "\n\t2.Show Student Record";
-		std::cout << "\n\t3.Search Student";
-		std::cout << "\n\t4.EXIT";
-		std::cout << "\n\tEnter ur choice: ";
-		std::cin >> choice;
-
-		switch (choice)
-		{
-		case 1:
-			s[i] = new student;
-			s[i]->getdata();
-			i++;
-			break;
-		case 2:
-			std::cin.ignore();
-			std::cout << "\nEnter Student name: ";
-			std::cin.getline(Name, 20);
-			for (t = 0; t < i; t++) {
-				if (s[t]->search(Name)) {
-					s[t]->showdata();
-					break;
-				}
-			}
-			if (t == i)
-				std::cout << "Student not record in base";
-			break;
-		case 3:
-			std::cin.ignore();
-			std::cout << "\nEnter Student Name: ";
-			std::cin.getline(Name, 20);
-			for (t = 0; t < i; t++) {
-				if (s[t]->search(Name)) {
-					std::cout << "\nThe student is recorded in the database";
-					std::cout << "\nWould you like to know more about the student?";
-					std::cout << "\n\t1.YES";
-					std::cout << "\n\t2.NO" << std::endl;
-					std::cin >> ch;
-					if (ch == 1)
-						s[t]->showdata();
-					else if (ch == 2)
-						return 1;
-					break;
-
-				}
-
-			}
-			if(t==i)
-				std::cout << "\nThe student is not recorded in the database";
-			break;
-		case 4:
-			exit(0);
-		default: std::cout << "\nInvalid number of choice!";
-				}
-			}
-
-
-
-	return 0;
-		}
 
